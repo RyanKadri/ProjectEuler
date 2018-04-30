@@ -1,3 +1,4 @@
+// Same approach as problem 16
 function digitsIterativeFunc(fn, startAt, numIterations) {
     let calcRes = [startAt];
     for(let itNum = 0; itNum < numIterations; itNum++) {
