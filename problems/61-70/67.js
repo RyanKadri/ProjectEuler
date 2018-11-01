@@ -10,14 +10,16 @@ function maxPath(triangle) {
     return calcTri[0][0];
 }
 
-const triangle = await fetch('https://projecteuler.net/project/resources/p067_triangle.txt')
-    .then(resp => resp.text())
-    .then(text => {
-        return text.trim()
-                   .split("\n")
-                   .map(row => 
-                       row.split(/\s+/)
-                       .map(el => parseInt(el))
-                   )
-    });
-console.log(maxPath(triangle))
+(async function() {
+    const triangle = await fetch('https://projecteuler.net/project/resources/p067_triangle.txt')
+        .then(resp => resp.text())
+        .then(text => {
+            return text.trim()
+                       .split("\n")
+                       .map(row => 
+                           row.split(/\s+/)
+                           .map(el => parseInt(el))
+                       )
+        });
+    console.log(maxPath(triangle))
+})()

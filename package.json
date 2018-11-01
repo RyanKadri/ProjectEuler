@@ -1,0 +1,22 @@
+{
+  "name": "projecteuler",
+  "version": "1.0.0",
+  "description": "I wrote most / all of these snippets to run in the browser console. If there is \"input\" to the problem in the page, the logic will be included to scrape that data into a sane/usable format.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanKadri/ProjectEuler.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyanKadri/ProjectEuler/issues"
+  },
+  "homepage": "https://github.com/RyanKadri/ProjectEuler#readme",
+  "dependencies": {
+    "glob": "^7.1.3"
+  }
+}

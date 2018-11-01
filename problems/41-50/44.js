@@ -5,7 +5,6 @@ function minDiffPentagonals() {
     let currentPent = 5;
     let currInput = 2;
     const pentagonals = [1];
-    debugger;
 
     while((currentPent - lastPent) < minDiff) {
         for(const previous of pentagonals) {
@@ -14,7 +13,7 @@ function minDiffPentagonals() {
                 isPentagonal(currentPent - previous)) {
                 // Just returning this value gives you the correct result much faster. It is not guaranteed to
                 // actually be correct though.
-                minDiff = currentPent - previous;
+                return currentPent - previous;
             }
         }
         pentagonals.push(currentPent);
