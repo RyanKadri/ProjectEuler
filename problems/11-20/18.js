@@ -10,12 +10,18 @@ function maxPath(triangle) {
     return calcTri[0][0];
 }
 
-const triangle = document.querySelector('.problem_content p:nth-last-child(2)')
-    .innerText
-    .trim()
-    .split("\n")
-    .map(row => 
-        row.split(/\s+/)
-           .map(el => parseInt(el))
-    )
-console.log(maxPath(triangle))
+let triangle;
+if(typeof window === 'undefined') {
+    triangle = require('fs').readFileSync('./resources/18.txt', { encoding: 'utf8'});
+} else {
+    triangle = document.querySelector('.problem_content p:nth-last-child(2)').innerText
+}
+console.log(maxPath(
+    triangle
+        .trim()
+        .split("\n")
+        .map(row => 
+            row.split(/\s+/)
+               .map(el => parseInt(el))
+        )
+))

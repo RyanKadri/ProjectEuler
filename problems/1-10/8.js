@@ -8,5 +8,10 @@ function largestProductSequence(inString, ofLength) {
     return largest;
 }
 
-const numString = document.querySelector(".problem_content p:nth-child(2)").innerText.replace(/\s/g, '')
-console.log(largestProductSequence(numString, 13));
+let numString;
+if(typeof window === 'undefined') {
+    numString = require('fs').readFileSync(`./resources/8.txt`, { encoding: 'utf8'})
+} else {
+    numString = document.querySelector(".problem_content p:nth-child(2)").innerText;
+}
+console.log(largestProductSequence(numString.replace(/\s/g, ''), 13));

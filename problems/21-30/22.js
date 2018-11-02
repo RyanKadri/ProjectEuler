@@ -16,6 +16,5 @@ function calcNameScores(namesArray) {
                 .split(",")
                 .map(name => name.replace(/\"/g, ''))
         )
-    
     console.log(calcNameScores(names));
 })()

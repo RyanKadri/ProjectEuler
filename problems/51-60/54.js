@@ -138,7 +138,12 @@ function playerOneWins(line) {
 }
 
 (async () => {
-    const downloadLoc = document.querySelector('.problem_content a').href;
+    let downloadLoc;
+    if(typeof window !== 'undefined') {
+        downloadLoc = document.querySelector('.problem_content a').href;
+    } else {
+        downloadLoc = 'https://projecteuler.net/project/resources/p054_poker.txt';
+    }
     const file = await fetch(downloadLoc).then(res => res.text());
     const lines = file.split('\n');
     const games = lines.filter(line => line.trim() !== '');

@@ -14,7 +14,6 @@ function largestSequenceInGrid(grid, seqLength) {
                 const prod = seq.reduce((acc, el) => acc * el, 1);
                 if(prod > largest) {
                     largest = prod;
-                    console.log(row, col);
                 }
             }
         }
@@ -34,12 +33,17 @@ function largestSequenceInGrid(grid, seqLength) {
 
 }
 
-const grid = document.querySelector('.problem_content p:nth-child(2)').innerText
-    .trim()
-    .split("\n")
-    .map(row => 
-        row.split(/\s+/)
-            .map(el => parseInt(el))
-    );
+let grid;
+if(typeof window === 'undefined') {
+    grid = require('fs').readFileSync('./resources/11.txt', { encoding: 'utf8' });
+} else {
+    grid = document.querySelector('.problem_content p:nth-child(2)').innerText
+        .trim()
+        .split("\n")
+        .map(row => 
+            row.split(/\s+/)
+                .map(el => parseInt(el))
+        );
+}
 
 console.log(largestSequenceInGrid(grid, 4));

@@ -2,27 +2,30 @@ const { Worker, MessageChannel } = require('worker_threads');
 const path = require('path');
 const glob = require('glob');
 const { problemsGlob, timeout, workerPath } = require('./config');
+const ProgressBar = require('progress');
 
 (async function() {
     const wPath = path.resolve(workerPath)
     const maxExecTime = timeout;
     const results = new Map();
     let worker = new Worker(wPath);
+    const files = await problemFiles();
 
-    for(const file of await problemFiles()) {
+    let currFile = 0;
+    for(const file of files) {
+        const bar = new ProgressBar(':bar :percent', { total: files.length, width: 60, head: '>' });
         const start = Date.now();
         let success = true;
         try {
             await safeExec(file);
         } catch(e) {
-            console.error(
-`Error in ${file}: 
-${e}`
-            );
+            console.error('Error in ' + file + '\n' + e);
             success = false
         }
         const stop = Date.now();
         results.set( file, {time: stop - start, success });
+        bar.update((currFile + 1) / files.length);
+        currFile ++;
     }
     worker.terminate();
     report(results);
@@ -78,7 +81,7 @@ ${e}`
         }
         results.sort((a,b) => b.time - a.time);
 
-        console.log(`Ran ${numTests} problems in ${totalTime / 1000} seconds for an average of ${ totalTime / (numTests - errors )} ms per test`);
+        console.log('\n' + `Ran ${numTests} problems in ${totalTime / 1000} seconds for an average of ${ totalTime / (numTests - errors )} ms per test`);
         console.log(`Found ${errors} errors`);
         const problemReport = results
             .filter((_, i) => i < 5)

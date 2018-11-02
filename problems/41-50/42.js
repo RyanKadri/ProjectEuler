@@ -11,7 +11,6 @@ function triangleWords(allowedWords) {
         triangle = (trianglePos * (trianglePos + 1)) / 2;
         trianglePos ++;
     }
-    debugger;
 
     let numTriangleWords = 0;
     for(const word of allowedWords.map(word => word.toLowerCase())) {
@@ -27,8 +26,13 @@ function triangleWords(allowedWords) {
 }
 
 (async function() {
-    const link = document.querySelector('.problem_content a');
-    const href = link.href;
+    let href;
+    if(typeof window === 'undefined') {
+        href = 'https://projecteuler.net/project/resources/p042_words.txt';
+    } else {
+        const link = document.querySelector('.problem_content a');
+        href = link.href;
+    }
     const words = await fetch(href)
         .then(res => res.text())
         .then(text => text.replace(/"/g, "").split(","));

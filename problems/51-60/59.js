@@ -36,8 +36,13 @@ function decryptXOR(message, keyLength) {
 }
 
 (async () => {
-    const link = document.querySelector('.problem_content a');
-    const content = await fetch(link.href).then(res => res.text());
+    let link;
+    if(typeof window !== 'undefined') {
+        link = document.querySelector('.problem_content a').href;
+    } else {
+        link = 'https://projecteuler.net/project/resources/p059_cipher.txt';
+    }
+    const content = await fetch(link).then(res => res.text());
     const message = content.trim().split(',');
     const decrypted = decryptXOR(message, 3)
     console.log(decrypted.join(""));

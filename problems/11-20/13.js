@@ -8,8 +8,12 @@ function firstNDigitsOfSum(vals, nDigits) {
     return `${sum}`.substr(0, nDigits);
 }
 
-const vals = document.querySelector('.problem_content div').innerText
-    .trim()
-    .split("\n")
+let vals;
 
-console.log(firstNDigitsOfSum(vals, 10));
+if(typeof window === 'undefined'){
+    vals = require('fs').readFileSync('./resources/13.txt', { encoding: 'utf8'});
+} else { 
+    vals = document.querySelector('.problem_content div').innerText
+}
+
+console.log(firstNDigitsOfSum(vals.trim().split("\n"), 10));
